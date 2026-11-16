@@ -1,0 +1,18 @@
+{
+  "name": "ETW Foto-App",
+  "short_name": "ETW Foto",
+  "description": "Lokale Fotodokumentation mit Zeichnungen und PDF-Export",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#132638",
+  "theme_color": "#132638",
+  "icons": [
+    {
+      "src": "logo-etw.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
