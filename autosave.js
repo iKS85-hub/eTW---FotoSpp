@@ -16,6 +16,7 @@ await save('current',{project,notes:document.getElementById('notes').value,pages
 status.textContent='Lokal gesichert: '+new Date().toLocaleTimeString('de-DE')+' · Google Drive noch nicht verbunden';
 }catch(err){status.textContent='Sicherung fehlgeschlagen: '+(err.message||err)}finally{working=false;if(again){again=false;schedule()}}}
 function schedule(){clearTimeout(timer);timer=setTimeout(persist,1200)}
+window.addEventListener('etw-save-now',()=>{clearTimeout(timer);persist()});
 ['project','notes','photo','tool','color','width'].forEach(id=>document.getElementById(id)?.addEventListener('change',schedule));
 document.getElementById('canvas')?.addEventListener('pointerup',schedule);
 ['undo','clear','remove','prev','next'].forEach(id=>document.getElementById(id)?.addEventListener('click',schedule));
