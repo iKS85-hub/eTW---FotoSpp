@@ -20,7 +20,7 @@ function schedule(){clearTimeout(timer);timer=setTimeout(persist,1200)}
 document.getElementById('canvas')?.addEventListener('pointerup',schedule);
 ['undo','clear','remove','prev','next'].forEach(id=>document.getElementById(id)?.addEventListener('click',schedule));
 document.getElementById('overlaySave')?.addEventListener('click',schedule);
-const button=document.createElement('button');button.type='button';button.className='secondary';button.textContent='Automatischen Entwurf wiederherstellen';draftButton.parentNode.insertBefore(button,status.nextSibling);
+const button=document.createElement('button');button.type='button';button.className='secondary';button.textContent='Lokalen Entwurf öffnen (offline)';draftButton.parentNode.insertBefore(button,status.nextSibling);
 button.addEventListener('click',async()=>{try{const d=await load('current');if(!d)return alert('Noch kein automatisch gesicherter Entwurf vorhanden.');if(!confirm('Aktuelle Fotos durch den automatisch gespeicherten Entwurf ersetzen?'))return;const restored=[];for(const p of d.pages){const url=URL.createObjectURL(p.image);const im=new Image();im.src=url;await im.decode();URL.revokeObjectURL(url);restored.push({img:im,strokes:p.strokes||[],name:p.name||''})}pages=restored;current=0;document.getElementById('project').value=d.project;document.getElementById('notes').value=d.notes||'';render();status.textContent='Entwurf vom '+new Date(d.savedAt).toLocaleString('de-DE')+' wiederhergestellt.'}catch(err){alert('Wiederherstellung fehlgeschlagen: '+(err.message||err))}});
 window.addEventListener('pagehide',()=>{if(timer){clearTimeout(timer);persist()}});
 status.textContent='Automatische lokale Sicherung bereit. Projektbezeichnung erforderlich.';
