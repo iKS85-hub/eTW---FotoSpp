@@ -1,4 +1,4 @@
-const CACHE='etw-foto-v7';
+const CACHE='etw-foto-v8';
 const ASSETS=['./','./index.html','./logo-etw.svg','./manifest.webmanifest','./autosave.js'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>key.startsWith('etw-foto-')&&key!==CACHE).map(key=>caches.delete(key)));await self.clients.claim()})()));
